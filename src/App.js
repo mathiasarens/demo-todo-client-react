@@ -4,7 +4,13 @@ import TodoComponent from './todo/TodoComponent'
 
 class App extends React.Component {
     render() {
-        return (<TodoComponent/>)
+        return (
+            <div className="wrapper">
+                <div className="container">
+            <TodoComponent/>
+                </div>
+            </div>
+        )
     }
 
 }

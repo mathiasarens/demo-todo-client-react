@@ -1,6 +1,8 @@
 import React from 'react';
 import TodoList from './TodoList'
+import './TodoComponent.css';
 import ErrorComponent from "../error/ErrorComponent";
+import { Form, FormGroup, Label, Button, Input } from 'reactstrap';
 
 class TodoComponent extends React.Component {
     constructor(props) {
@@ -11,7 +13,7 @@ class TodoComponent extends React.Component {
     }
 
     componentDidMount() {
-        const url = '/api/v1/todo'
+        const url = '/api/v1/todo';
         fetch(url)
             .then(response => {
                 if (response.status === 200) {
@@ -34,23 +36,25 @@ class TodoComponent extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>TODO</h3>
+            <div className="todoComponent">
+                <h3 className="header">Todos</h3>
                 <ErrorComponent error={this.state.error}/>
                 <TodoList items={this.state.items}/>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="new-todo">
-                        What needs to be done?
-                    </label>
-                    <input
+                <Form onSubmit={this.handleSubmit}>
+                    <FormGroup>
+                    <Input
                         id="new-todo"
+                        placeholder="What needs to be done?"
                         onChange={this.handleChange}
                         value={this.state.text}
                     />
-                    <button>
+                    </FormGroup>
+                    <div className="button">
+                    <Button>
                         Add #{this.state.items.length + 1}
-                    </button>
-                </form>
+                    </Button>
+                        </div>
+                </Form>
             </div>
         );
     }
